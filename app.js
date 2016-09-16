@@ -92,8 +92,16 @@ app.put("/blog/:id", function(req, res){
 
 //DESTROY
 app.delete("/blog/:ide", function(req, res){
-    res.send("You have reached the delete route")
+    Blog.findByIdAndRemove(req.params.id, function(err){
+        if(err){
+            console.log("Error!");
+        } else {
+            res.redirect("/blog");
+            console.log("Deleted!!");
+        }
+    })
 });
+
 app.listen(process.env.PORT, process.env.IP, function(){
    console.log("Blog is now running!") 
 });
