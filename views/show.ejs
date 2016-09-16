@@ -11,9 +11,13 @@
                  <span> <%= blog.created.toDateString() %></span>
             </div>
             <div class="description">
-                <p><%- blog.body %></p> <!-- runs as code instead of displaying as string
+                <p><%- blog.body %></p> <!-- runs as code instead of displaying as string -->
             </div>
         </div>
+        <form action="/blog/<%= blog._id%>" method="POST">
+            
+            
+        </form>
     </div>
     
        
