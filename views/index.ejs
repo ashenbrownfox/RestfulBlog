@@ -1,0 +1,17 @@
+<% include ./partials/header%>
+
+<h1>Index Page</h1>
+
+<% blog.forEach(function(blogpost){ %>
+    <div>
+        <h2><%= blogpost.title %></h2>
+        <img src = "<%= blogpost.image %>" width=720 height=700>
+        <span> <%= blogpost.created %></span>
+        <p><%= blogpost.body.substring(0,100) %> ..... </p>
+        <a href="/blog/<%= blogpost._id %>">Read More</a>
+    </div>
+
+<% }); %>
+
+
+<% include ./partials/footer%>
