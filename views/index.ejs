@@ -1,17 +1,43 @@
 <% include ./partials/header%>
 
-<h1>Index Page</h1>
+<div class="ui main text container">
+    <div class="ui huge header">RESTfuk Blog</div>
+    <div class="ui top attached segment">
+        <div class="ui divided items">
+            <% blog.forEach(function(blogpost){ %>
+            <div class="item">
+                <div class="image">
+                    <img src = "<%= blogpost.image %>">
+                </div>
+                <div class="content">
+                    <a href="/blog/<%= blogpost._id %>"><%= blogpost.title %></a>
+                
+                    <div class="meta">
+                        <span><%= blogpost.created.toDateString() %></span>
+                    </div>
+                    
+                    <div class="description">
+                        <p><%- blogpost.body.substring(0,100) %> ..... </p>
+                    </div>
+                    
+                    <div class="extra">
+                        <a class="ui floated basic violet button" href="/blog/<%= blogpost._id %>">
+                            Read More
+                            <i class="right chevron icon"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!--<span> <%= blogpost.created %></span>-->
 
-<% blog.forEach(function(blogpost){ %>
-    <div>
-        <h2><%= blogpost.title %></h2>
-        <img src = "<%= blogpost.image %>" width=720 height=700>
-        <span> <%= blogpost.created %></span>
-        <p><%= blogpost.body.substring(0,100) %> ..... </p>
-        <a href="/blog/<%= blogpost._id %>">Read More</a>
+            </div>
+        
+            <% }); %>
+        </div>
     </div>
+</div>
 
-<% }); %>
+
 
 
 <% include ./partials/footer%>

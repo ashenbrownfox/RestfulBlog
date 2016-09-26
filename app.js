@@ -1,5 +1,6 @@
 /************  App Config  ***********/
 var express= require("express"),
+    expressSanitizer = require("express-sanitizer"),
     app = express(),
     bodyParser = require("body-parser"),
     mongoose = require("mongoose"),
@@ -9,9 +10,10 @@ mongoose.connect("mongodb://localhost/restful_blog_app");
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
+app.use(expressSanitizer());
 app.use(methodOverride("_method"));
 
-/************  Mongoose/Models Config  ***********/
+/************ Defining the Mongoose Database Schema  ***********/
 var blogSchema = new mongoose.Schema({
    title: String,
    image: String,
@@ -20,8 +22,6 @@ var blogSchema = new mongoose.Schema({
 });
 
 var Blog = mongoose.model("Blog", blogSchema);
-
-
 
 
 
@@ -46,6 +46,9 @@ app.get("/blog/new", function(req, res){
 });
 
 app.post("/blog",function(req,res){
+    //create the blog
+    req.body.blog.body = req.sanitize(req.body.blog.body);
+    console.log(req.body);
     Blog.create(req.body.blog, function(err, newBlog){
         if(err){
             res.render("new");
