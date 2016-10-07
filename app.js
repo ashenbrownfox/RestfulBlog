@@ -6,7 +6,12 @@ var express= require("express"),
     mongoose = require("mongoose"),
     methodOverride = require("method-override");
     
-mongoose.connect("mongodb://localhost/restful_blog_app");    
+    
+var url = process.env.DATABASEURL || "mongodb://localhost/restful_blog_app"  
+//ProductionDB mongodb://<dbuser>:<dbpassword>@ds053146.mlab.com:53146/restful_blog_app
+//mongoose.connect("mongodb://localhost/restful_blog_app");   
+mongoose.connect(url);    
+ 
 app.set("view engine","ejs");
 app.use(express.static("public"));
 app.use(bodyParser.urlencoded({extended: true}));
